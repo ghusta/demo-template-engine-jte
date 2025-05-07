@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URL;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -20,10 +20,10 @@ class PageRenderTest {
 
     @Test
     void searchJteRoot() {
-        Path jteRootPath = Paths.get("templates", "jte", ".jteroot");
-        URL jteRootURL = PageRenderTest.class.getClassLoader().getResource(jteRootPath.toString().replace('\\', '/'));
-        assertThat(jteRootURL).isNotNull();
-        System.out.println(".jteroot => " + jteRootURL);
+        Path jteRootPath = Paths.get("src", "main", "jte", ".jteroot");
+//        URL jteRootURL = PageRenderTest.class.getClassLoader().getResource(jteRootPath.toString().replace('\\', '/'));
+        assertThat(jteRootPath).exists();
+        System.out.println(".jteroot => " + jteRootPath);
     }
 
     @Test
@@ -45,7 +45,14 @@ class PageRenderTest {
         System.out.println(output);
 
         try {
-            FileWriter fileWriter = new FileWriter(Path.of("temp", "test.html").toFile());
+            Path tempDir = Path.of("temp");
+            if (!tempDir.toFile().exists()) {
+                Files.createDirectory(tempDir);
+            } else if (!tempDir.toFile().isDirectory()) {
+                throw new IOException("temp is not a directory");
+            }
+
+            FileWriter fileWriter = new FileWriter(tempDir.resolve("test.html").toFile(), false);
             fileWriter.write(output.toString());
             fileWriter.flush();
             fileWriter.close();

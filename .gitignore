@@ -39,3 +39,6 @@ build/
 
 ### Temp files
 temp/
+
+### JTE generated templates
+jte-classes/
