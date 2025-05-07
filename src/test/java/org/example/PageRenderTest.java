@@ -29,8 +29,15 @@ class PageRenderTest {
     @Test
     void renderPageExample() {
         Path jtePath = Paths.get("src", "main", "jte"); // should search from classpath ?
+        Path precompiledTemplatesPath = Paths.get("target", "classes"); // templates precompiled by maven plugin
+
+        // OPTION 1 : if templates are not precompiled first
         CodeResolver codeResolver = new DirectoryCodeResolver(jtePath); // This is the directory where your .jte files are located.
-        TemplateEngine templateEngine = TemplateEngine.create(codeResolver, ContentType.Html); // Two choices: Plain or Html
+        // TemplateEngine templateEngine = TemplateEngine.create(codeResolver, ContentType.Html); // Two choices: Plain or Html
+
+        // OPTION 2 : if templates are precompiled first
+        TemplateEngine templateEngine = TemplateEngine.createPrecompiled(precompiledTemplatesPath, ContentType.Html); // Two choices: Plain or Html
+
         templateEngine.setTrimControlStructures(true);
 
         Page page = Page.builder()
