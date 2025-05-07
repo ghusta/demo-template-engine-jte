@@ -52,11 +52,11 @@ class PageRenderTest {
         System.out.println(output);
 
         try {
-            Path tempDir = Path.of("temp");
+            Path tempDir = Path.of("target", "test-data");
             if (!tempDir.toFile().exists()) {
                 Files.createDirectory(tempDir);
             } else if (!tempDir.toFile().isDirectory()) {
-                throw new IOException("temp is not a directory");
+                throw new IOException(tempDir + " is not a directory");
             }
 
             FileWriter fileWriter = new FileWriter(tempDir.resolve("test.html").toFile(), false);
