@@ -6,6 +6,7 @@ import gg.jte.TemplateEngine;
 import gg.jte.TemplateOutput;
 import gg.jte.output.StringOutput;
 import gg.jte.resolve.DirectoryCodeResolver;
+import org.example.model.Page;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileWriter;
@@ -32,10 +33,12 @@ class PageRenderTest {
         Path precompiledTemplatesPath = Paths.get("target", "classes"); // templates precompiled by maven plugin
 
         // OPTION 1 : if templates are not precompiled first
+        // i.e. developmentMode
         CodeResolver codeResolver = new DirectoryCodeResolver(jtePath); // This is the directory where your .jte files are located.
         // TemplateEngine templateEngine = TemplateEngine.create(codeResolver, ContentType.Html); // Two choices: Plain or Html
 
         // OPTION 2 : if templates are precompiled first
+        // i.e. usePrecompiledTemplates
         TemplateEngine templateEngine = TemplateEngine.createPrecompiled(precompiledTemplatesPath, ContentType.Html); // Two choices: Plain or Html
 
         templateEngine.setTrimControlStructures(true);

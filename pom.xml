@@ -5,6 +5,7 @@
     <groupId>org.example</groupId>
     <artifactId>demo-template-engine-jte</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
 
     <description>Demo Java Template Engine (JTE)</description>
 
@@ -14,6 +15,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <jte.version>3.2.1</jte.version>
+        <lombok.version>1.18.38</lombok.version>
+        <spring.version>6.2.6</spring.version>
     </properties>
 
     <dependencies>
@@ -24,10 +27,29 @@
             <version>${jte.version}</version>
         </dependency>
 
+        <!-- Used only to access utility classes to integrate JTE with Spring FWK (TemplateEngine, JteViewResolver...) -->
+        <dependency>
+            <groupId>gg.jte</groupId>
+            <artifactId>jte-spring-boot-starter-3</artifactId>
+            <version>${jte.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>6.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.38</version>
+            <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -48,6 +70,26 @@
 
     <build>
         <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.14.0</version>
+                <configuration>
+                    <parameters>true</parameters>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>11.0.24</version>
+                <configuration>
+                    <webApp>
+                        <contextPath>/</contextPath>
+                    </webApp>
+                </configuration>
+            </plugin>
 
             <plugin>
                 <groupId>gg.jte</groupId>

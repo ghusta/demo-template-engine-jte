@@ -1,9 +1,10 @@
-@import org.example.Page
+@import org.example.model.Page
 @import gg.jte.Content
 @param Page page
 @param Content content
-@param Content contentScriptHead
-@param Content contentScriptEnd
+@param Content contentScriptHead = null
+@param Content contentScriptEnd = null
+<%-- See: https://jte.gg/syntax/#content --%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,8 +12,10 @@
         <meta name="description" content="${page.getDescription()}">
     @endif
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${page.getTitle()}</title>
-    ${contentScriptHead}
+    <title>JTE Demo - ${page.getTitle()}</title>
+    @if (contentScriptHead != null)
+        ${contentScriptHead}
+    @endif
 </head>
 <body>
 <header>
@@ -23,6 +26,8 @@
 </main>
 <footer>
 </footer>
+@if (contentScriptEnd != null)
 ${contentScriptEnd}
+@endif
 </body>
 </html>
