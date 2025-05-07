@@ -1,0 +1,20 @@
+= Demo Java Template Engine (JTE)
+:toc:
+:imagesdir: assets/images
+
+== Overview
+
+Demo for testing https://jte.gg/[JTE].
+
+image::jte.svg[JTE Logo]
+
+== References
+
+* https://jte.gg/[Java Template Engine]
+** https://github.com/casid/jte[GitHub project]
+* Video from Dan Vega
+** 🎬 https://youtu.be/CLgWfNnsDiM?si=Uww5FZ7n8eDCL0fY&t=368[A Java Developer's Guide to Navigating the Frontend Landscape (JavaOne 2025)] (starts at 6:08)
+** 🎬 https://youtu.be/CdtyvO9jg8E?si=8GTMhZT08Ig5ObCE[A Spring Developers Guide to Navigating the Frontend Landscape by Dan Vega @ Spring I/O 2024]
+* Articles
+** https://www.danvega.dev/blog/hello-jte
+*** 🎬 https://youtu.be/KoWgHSWA1cc?si=DhuNkbIjRaC2t4s3
