@@ -45,7 +45,10 @@ public class WebConfig {
             // If using IntelliJ, use Ctrl-F9 to trigger an auto-refresh when editing non-jte files.
             String[] split = jteProperties.getTemplateLocation().split("/");
             CodeResolver codeResolver = new DirectoryCodeResolver(FileSystems.getDefault().getPath("", split));
-            return TemplateEngine.create(codeResolver, Paths.get("jte-classes"), ContentType.Html, getClass().getClassLoader());
+            TemplateEngine templateEngine = TemplateEngine.create(codeResolver, Paths.get("jte-classes"), ContentType.Html, getClass().getClassLoader());
+            templateEngine.setHtmlCommentsPreserved(true);
+            templateEngine.setTrimControlStructures(true);
+            return templateEngine;
         }
         throw new JteConfigurationException("You need to either set gg.jte.usePrecompiledTemplates or gg.jte.developmentMode to true ");
     }
