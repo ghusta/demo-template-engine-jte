@@ -7,10 +7,14 @@ import gg.jte.resolve.DirectoryCodeResolver;
 import gg.jte.springframework.boot.autoconfigure.JteConfigurationException;
 import gg.jte.springframework.boot.autoconfigure.JteProperties;
 import gg.jte.springframework.boot.autoconfigure.JteViewResolver;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -66,6 +70,19 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public JteViewResolver jteViewResolver(TemplateEngine templateEngine, JteProperties jteProperties) {
         return new JteViewResolver(templateEngine, jteProperties);
+    }
+
+    /**
+     * Add Context Path to All Views Automatically.
+     *
+     * @see InterceptorRegistry#addInterceptor(HandlerInterceptor)
+     */
+    private static class ContextPathInterceptor implements HandlerInterceptor {
+        @Override
+        public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+            request.setAttribute("contextPath", request.getContextPath());
+            return true;
+        }
     }
 
 }
