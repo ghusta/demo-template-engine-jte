@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.nio.file.FileSystems;
 import java.nio.file.Paths;
@@ -18,7 +20,15 @@ import java.nio.file.Paths;
 @Configuration(proxyBeanMethods = false)
 @EnableWebMvc
 @ComponentScan(basePackages = "org.example.controller")
-public class WebConfig {
+public class WebConfig implements WebMvcConfigurer {
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        // Serve Static Resources with Spring
+        // See: https://www.baeldung.com/spring-mvc-static-resources#resource-http-request-handler
+        registry.addResourceHandler("/third-party-libs/**")
+                .addResourceLocations("/third-party-libs/");
+    }
 
     // look into gg.jte.springframework.boot.autoconfigure.JteAutoConfiguration
 
