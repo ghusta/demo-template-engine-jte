@@ -8,6 +8,15 @@ Demo for testing https://jte.gg/[JTE].
 
 image::jte.svg[JTE Logo]
 
+== Run demo
+
+[source,bash]
+----
+mvn jetty:run -Djetty.port=8080
+----
+
+Then go to http://localhost:8080/
+
 == References
 
 * https://jte.gg/[Java Template Engine]
