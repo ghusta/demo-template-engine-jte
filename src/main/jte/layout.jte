@@ -13,6 +13,7 @@
     @endif
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JTE Demo - ${page.getTitle()}</title>
+    <link rel="stylesheet" href="./webjars/picocss__pico/css/pico.min.css">
     @if (contentScriptHead != null)
         ${contentScriptHead}
     @endif
