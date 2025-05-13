@@ -32,6 +32,16 @@ public class WebConfig implements WebMvcConfigurer {
         // See: https://www.baeldung.com/spring-mvc-static-resources#resource-http-request-handler
         registry.addResourceHandler("/third-party-libs/**")
                 .addResourceLocations("/third-party-libs/");
+
+        // This tells Spring where to find WebJar static resources
+        // For version agnostic WebJars, see :
+        // - org.springframework.web.servlet.config.annotation.ResourceChainRegistration.isWebJarsAssetLocatorPresent
+        // - org.springframework.web.servlet.resource.WebJarsResourceResolver (depends on webjars-locator)
+        // As of Spring 6.2, use : org.springframework.web.servlet.resource.LiteWebJarsResourceResolver (depends on webjars-locator-lite)
+        registry
+                .addResourceHandler("/webjars/**")
+                .addResourceLocations("classpath:/META-INF/resources/webjars/")
+                .resourceChain(true);
     }
 
     // look into gg.jte.springframework.boot.autoconfigure.JteAutoConfiguration
