@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     @if(page.getDescription() != null)
         <meta name="description" content="${page.getDescription()}">
     @endif
