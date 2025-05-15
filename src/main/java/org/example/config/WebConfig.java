@@ -13,13 +13,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 
 import java.nio.file.FileSystems;
 import java.nio.file.Paths;
+import java.util.Locale;
 
 @Configuration(proxyBeanMethods = false)
 @EnableWebMvc
@@ -42,6 +45,17 @@ public class WebConfig implements WebMvcConfigurer {
                 .addResourceHandler("/webjars/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/")
                 .resourceChain(true);
+    }
+
+    /**
+     * Resolution of {@link Locale} from request header {@code Accept-Language} (for i18n).
+     */
+    @Bean
+    public LocaleResolver localeResolver() {
+        AcceptHeaderLocaleResolver resolver = new AcceptHeaderLocaleResolver();
+        // force default locale, ignoring system properties passed to JVM (user.language, user.country)
+        resolver.setDefaultLocale(Locale.ENGLISH);
+        return resolver;
     }
 
     // look into gg.jte.springframework.boot.autoconfigure.JteAutoConfiguration
