@@ -16,7 +16,7 @@
 
         <jte.version>3.2.1</jte.version>
         <lombok.version>1.18.38</lombok.version>
-        <spring-framework.version>6.2.7</spring-framework.version>
+        <spring-framework.version>6.2.8</spring-framework.version>
     </properties>
 
     <dependencyManagement>
